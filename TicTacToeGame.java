@@ -28,10 +28,24 @@ public class TicTacToeGame {
 		}
 	}
 
+	//UC3
+	public static void printBoard() {
+        	for (int i = 1; i < board.length; i++) {
+                	if (i%3 == 0 ) {
+                        	System.out.println("  " + board[i]);
+                                System.out.println((i < board.length - 1) ? "-----+-----+------" : "");
+                        }
+                        else
+                                System.out.print("  " + board[i] + "  |");
+                }
+        }
+
+	//main
 	public static void main(String args[]) {
 		createBoard();
 		choose();
-		System.out.println("Computer " + computer);
-		System.out.println("Player " + player);
+		System.out.println("You letter is " + player);
+		System.out.println("Computer letter is  " + computer);
+		printBoard();
 	}
 }
