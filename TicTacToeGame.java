@@ -13,6 +13,7 @@ public class TicTacToeGame {
         private static int index;
 
         private static final int WINNING_CONDITION = 3;
+        private static final int IF_WINNING_ADN_BLOCKING = 2;
 
         private static ArrayList<int[]> condition = new ArrayList<>();
 
@@ -163,7 +164,7 @@ public class TicTacToeGame {
                         for (int j = 0; j < condition.get(index).length; j++) {
                                 if (board[condition.get(index)[j]] == letter) {
                                         sum = sum + 1;
-                                        if (sum == 2)
+                                        if (sum == IF_WINNING_ADN_BLOCKING)
                                                 return true;
                                 }
                         }
@@ -178,6 +179,22 @@ public class TicTacToeGame {
                         for (int l = 0; l < condition.get(index).length; l++) {
                                 if (board[condition.get(index)[l]] == ' ') {
                                         board[condition.get(index)[l]] = computer;
+                                        return true;
+                                }
+                        }
+                }
+                return false;
+        }
+
+	//UC9
+	//to block user
+        private static boolean blocking() {
+
+                if (checkCondition(player)) {
+                        for (int l = 0; l < condition.get(index).length; l++) {
+                                if (board[condition.get(index)[l]] == ' ') {
+                                        board[condition.get(index)[l]] = computer;
+                                        condition.remove(index);
                                         return true;
                                 }
                         }
