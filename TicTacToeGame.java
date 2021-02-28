@@ -208,8 +208,22 @@ public class TicTacToeGame {
                 for (int l = 0; l < corners.length; l++) {
                         if (board[corners[l]] == ' ') {
                                 board[corners[l]] = computer;
-                        check = false;
+                        	check = false;
                                 break;
+                        }
+                }
+                if (check) {
+                        if (board[CENTRE] == ' ') {
+                                board[CENTRE] = computer;
+                                check = false;
+                        }
+                }
+                if (check) {
+                        for (int l = 0; l < sides.length; l++) {
+                                if (board[sides[l]] == ' ') {
+                                        board[sides[l]] = computer;
+                                        break;
+                                }
                         }
                 }
         }
