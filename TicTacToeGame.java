@@ -7,6 +7,7 @@ public class TicTacToeGame {
 	private static char board[] = new char[10];
 	private static char computer;
 	private static char player;
+        private static int playerChance;
 
 	//UC1
 	private static void createBoard() {
@@ -52,6 +53,13 @@ public class TicTacToeGame {
 			board[position] = player;
         }
 
+	//UC6
+        public static void toss() {
+
+                playerChance = (int) (Math.random() * 2);
+                System.out.println((playerChance == 0) ? "Your Turn" : "Comuter Turn");
+        }
+
 	//main
 	public static void main(String args[]) {
 
@@ -60,6 +68,7 @@ public class TicTacToeGame {
 		choose();
 		System.out.println("Computer letter is  " + computer);
 		printBoard();
+		toss();
 		playerTurn();
 		printBoard();
 	}
