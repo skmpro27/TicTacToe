@@ -244,15 +244,20 @@ public class TicTacToeGame {
                         computerMove();
         }
 
-	//UC12
+	//UC12 and UC13
 	private static void execution() {
-		defaultConditions();
-		createBoard();
-		choose();
-		System.out.println("Computer letter is  " + computer);
-		printBoard();
-		toss();
-		turnChange();
+		String check = "Y";
+		while (check.equals("Y")) {
+			defaultConditions();
+			createBoard();
+			choose();
+			System.out.println("Computer letter is  " + computer);
+			printBoard();
+			toss();
+			turnChange();
+			System.out.print("Do you want to play again(y/n): ");
+			check = sc.next().toUpperCase();
+		}
 	}
 
 	//main
