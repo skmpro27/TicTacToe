@@ -40,13 +40,16 @@ public class TicTacToeGame {
                 }
         }
 
-        //UC4
+        //UC4 and UC5
         public static void playerTurn() {
                 System.out.print("Select a position to play(1-9): ");
                 int position = sc.nextInt();
                 if (board[position] != ' ') {
                         System.out.println("Position occupied select another");
-                }
+                	playerTurn();
+		}
+		else
+			board[position] = player;
         }
 
 	//main
@@ -56,6 +59,8 @@ public class TicTacToeGame {
 		createBoard();
 		choose();
 		System.out.println("Computer letter is  " + computer);
+		printBoard();
+		playerTurn();
 		printBoard();
 	}
 }
