@@ -16,7 +16,6 @@ public class TicTacToeGame {
         private static int[] sides = {2, 4, 6, 8};
 
         private static final int CENTRE = 5;
-
         private static final int WINNING_CONDITION = 3;
         private static final int IF_WINNING_ADN_BLOCKING = 2;
 
@@ -81,13 +80,19 @@ public class TicTacToeGame {
         public static void playerTurn() {
                 System.out.print("Select a position to play(1-9): ");
                 int position = sc.nextInt();
-                if (board[position] != ' ') {
-                        System.out.println("Position occupied select another");
-                	playerTurn();
+		if (position < board.length && position > 0) {
+                	if (board[position] != ' ') {
+                        	System.out.println("Position occupied select another");
+                		playerTurn();
+			}
+			else
+				board[position] = player;
 		}
-		else
-			board[position] = player;
-        }
+		else {
+			System.out.println("Invalid Input select again");
+			playerTurn();
+        	}
+	}
 
 	//UC6
         public static void toss() {
@@ -130,6 +135,7 @@ public class TicTacToeGame {
         private static void turnChange() {
                 while (true) {
                         if (winning() == 'X' || winning() == 'O') {
+				System.out.println("Game Over");
                                 System.out.println((player == winning()) ? "You Win" : "Computer Wins");
                                 break;
                         }
@@ -231,18 +237,15 @@ public class TicTacToeGame {
 	//define the flow of computer move
         private static void computerTurn() {
                 if (ifComputerWinning()) {
-                }
+  		}
                 else if (blocking()) {
                 }
                 else
                         computerMove();
         }
 
-
-	//main
-	public static void main(String args[]) {
-
-		System.out.println("Welcome to Tic Tac Toe Game");
+	//UC12
+	private static void execution() {
 		defaultConditions();
 		createBoard();
 		choose();
@@ -250,5 +253,17 @@ public class TicTacToeGame {
 		printBoard();
 		toss();
 		turnChange();
+	}
+
+	//main
+	public static void main(String args[]) {
+		try {
+			System.out.println("Welcome to Tic Tac Toe Game");
+			execution();
+		}
+		catch (Exception e) {
+			System.out.print("Some invalid input play again");
+			execution();
+		}
 	}
 }
