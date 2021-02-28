@@ -12,6 +12,11 @@ public class TicTacToeGame {
         private static int turn = 0;
         private static int index;
 
+        private static int[] corners = {1, 3, 7, 9};
+        private static int[] sides = {2, 4, 6, 8};
+
+        private static final int CENTRE = 5;
+
         private static final int WINNING_CONDITION = 3;
         private static final int IF_WINNING_ADN_BLOCKING = 2;
 
@@ -149,13 +154,6 @@ public class TicTacToeGame {
         }
 
 	//UC8
-	//to define computer turn flow
-        private static void computerTurn() {
-                if (ifComputerWinning()) {
-                }
-                //else if (blocking())
-	}
-
 	//to check condition for if computer winning
         private static boolean checkCondition(char letter) {
 
@@ -201,6 +199,31 @@ public class TicTacToeGame {
                 }
                 return false;
         }
+
+	//UC10
+	//method for computer to place charater
+        private static void computerMove() {
+
+                boolean check = true;
+                for (int l = 0; l < corners.length; l++) {
+                        if (board[corners[l]] == ' ') {
+                                board[corners[l]] = computer;
+                        check = false;
+                                break;
+                        }
+                }
+        }
+
+	//define the flow of computer move
+        private static void computerTurn() {
+                if (ifComputerWinning()) {
+                }
+                else if (blocking()) {
+                }
+                else
+                        computerMove();
+        }
+
 
 	//main
 	public static void main(String args[]) {
