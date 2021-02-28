@@ -85,9 +85,7 @@ public class TicTacToeGame {
 
 	//UC6
         public static void toss() {
-
                 playerChance = (int) (Math.random() * 2);
-                System.out.println((playerChance == 0) ? "Your Turn" : "Comuter Turn");
         }
 
 	//UC7
@@ -139,16 +137,52 @@ public class TicTacToeGame {
                                         playerTurn();
                                         printBoard();
                                 }
-				/*
                                 else {
                                         System.out.println("Computer Turn");
                                         computerTurn();
                                         printBoard();
                                 }
-				*/
                                 turn++;
                         }
                 }
+        }
+
+	//UC8
+	//to define computer turn flow
+        private static void computerTurn() {
+                if (ifComputerWinning()) {
+                }
+                //else if (blocking())
+	}
+
+	//to check condition for if computer winning
+        private static boolean checkCondition(char letter) {
+
+                for (index = 0; index < condition.size(); index++) {
+                        int sum = 0;
+                        for (int j = 0; j < condition.get(index).length; j++) {
+                                if (board[condition.get(index)[j]] == letter) {
+                                        sum = sum + 1;
+                                        if (sum == 2)
+                                                return true;
+                                }
+                        }
+                }
+                return false;
+        }
+
+	//to check if computer is winning
+        private static boolean ifComputerWinning() {
+
+                if (checkCondition(computer)) {
+                        for (int l = 0; l < condition.get(index).length; l++) {
+                                if (board[condition.get(index)[l]] == ' ') {
+                                        board[condition.get(index)[l]] = computer;
+                                        return true;
+                                }
+                        }
+                }
+                return false;
         }
 
 	//main
