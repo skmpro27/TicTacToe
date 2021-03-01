@@ -12,8 +12,8 @@ public class TicTacToeGame {
         private static int turn = 0;
         private static int index;
 
-        private static int[] corners = {1, 3, 7, 9};
-        private static int[] sides = {2, 4, 6, 8};
+        private static ArrayList<Integer> corners = new ArrayList<>();
+        private static ArrayList<Integer> sides = new ArrayList<>();
 
         private static final int CENTRE = 5;
         private static final int WINNING_CONDITION = 3;
@@ -23,6 +23,16 @@ public class TicTacToeGame {
 
 
         private static void defaultConditions() {
+		corners.add(1);
+		corners.add(3);
+		corners.add(7);
+		corners.add(9);
+
+		sides.add(2);
+		sides.add(4);
+		sides.add(6);
+		sides.add(8);
+
                 int[] arr0 = {1, 2, 3};
                 int[] arr1 = {4, 5, 6};
                 int[] arr2 = {7, 8, 9};
@@ -180,12 +190,7 @@ public class TicTacToeGame {
         private static boolean ifComputerWinning() {
 
                 if (checkCondition(computer)) {
-                        for (int l = 0; l < condition.get(index).length; l++) {
-                                if (board[condition.get(index)[l]] == ' ') {
-                                        board[condition.get(index)[l]] = computer;
-                                        return true;
-                                }
-                        }
+                        return assignValue();
                 }
                 return false;
         }
@@ -195,25 +200,35 @@ public class TicTacToeGame {
         private static boolean blocking() {
 
                 if (checkCondition(player)) {
-                        for (int l = 0; l < condition.get(index).length; l++) {
-                                if (board[condition.get(index)[l]] == ' ') {
-                                        board[condition.get(index)[l]] = computer;
-                                        condition.remove(index);
-                                        return true;
-                                }
-                        }
+			return assignValue();
                 }
                 return false;
         }
+
+	private static boolean assignValue() {
+        	for (int l = 0; l < condition.get(index).length; l++) {
+                	if (board[condition.get(index)[l]] == ' ') {
+                        	board[condition.get(index)[l]] = computer;
+                                condition.remove(index);
+                                return true;
+                        }
+                }
+		return false;
+	}
+
 
 	//UC10
 	//method for computer to place charater
         private static void computerMove() {
 
                 boolean check = true;
-                for (int l = 0; l < corners.length; l++) {
-                        if (board[corners[l]] == ' ') {
-                                board[corners[l]] = computer;
+                while (corners.size() > 0) {
+			int random = (int) (Math.random() * corners.size());
+                        if (board[corners.get(random)] != ' ') {
+				corners.remove(random);
+                        }
+                        else {
+                                board[corners.get(random)] = computer;
                         	check = false;
                                 break;
                         }
@@ -225,13 +240,17 @@ public class TicTacToeGame {
                         }
                 }
                 if (check) {
-                        for (int l = 0; l < sides.length; l++) {
-                                if (board[sides[l]] == ' ') {
-                                        board[sides[l]] = computer;
-                                        break;
-                                }
-                        }
-                }
+                        while (sides.size() > 0) {
+				int random = (int) (Math.random() * sides.size());
+                        	if (board[sides.get(random)] != ' ') {
+					sides.remove(random);
+                        	}
+                        	else {
+                        		board[sides.get(random)] = computer;
+                                	break;
+                        	}
+                	}
+		}
         }
 
 	//define the flow of computer move
